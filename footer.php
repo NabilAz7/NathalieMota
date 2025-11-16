@@ -9,6 +9,14 @@
 
 </footer>
 
+<?php
+// Inclure la modale de contact depuis template-parts
+get_template_part('template-parts/contact-modal');
+?>
+<?php get_template_part('template-parts/contact-modal'); ?>
+<?php wp_footer(); ?>
+
+
 <?php wp_footer(); ?>
 </body>
 

@@ -22,6 +22,15 @@ function nathaliemota_enqueue_styles()
         get_stylesheet_directory_uri() . '/style.css',
         array('twentytwentyfive-style') // dépendance au parent
     );
+
+    // Charger ton fichier JS
+    wp_enqueue_script(
+        'nathaliemota-scripts',
+        get_stylesheet_directory_uri() . '/js/index.js',
+        array('jquery'),
+        filemtime(get_stylesheet_directory() . '/js/index.js'),
+        true // Charge le JS dans le footer
+    );
 }
 add_action('wp_enqueue_scripts', 'nathaliemota_enqueue_styles');
 

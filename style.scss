@@ -1,0 +1,197 @@
+ /*
+Theme Name: NathalieMota
+Template: twentytwentyfive
+*/
+
+ /* Menu principal */
+
+ .site-header {
+    max-width: 1150px;            /* largeur totale du header */
+    margin: 0 auto;               /* centre horizontalement */
+    display: flex;                /* Place les éléments sur une même ligne */
+    justify-content: space-between;/* Logo à gauche — Menu à droite */
+    align-items: center;          /* Aligne verticalement */
+    padding: 20px;
+  
+}
+
+.main-menu ul {
+    display: flex;           /* Met les <li> sur une ligne */
+    list-style: none;        /* Supprime les puces */
+    margin: 0;               /* Supprime les marges par défaut */
+    padding: 0;              /* Supprime le padding par défaut */
+}
+
+.main-menu li {
+    margin-right: 20px;      /* Espacement entre les items */
+}
+
+.main-menu li:last-child {
+    margin-right: 0;         /* Pas de marge après le dernier item */
+}
+
+/* Optionnel : liens stylisés */
+.main-menu a {
+    text-decoration:none; 
+    color: #000;    /* Couleur des liens */
+    font-size: 16px;   
+    text-transform: uppercase;
+    font-family: "Space Mono", monospace;
+
+       
+
+}
+
+/* Logo */
+
+
+
+
+/* Hero */
+/* HERO en pleine largeur */
+.hero {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block; /* enlève l’espace blanc sous l’image */
+}
+
+body{
+    margin: 0;
+}
+
+ 
+/* FOOTER */
+.site-footer {
+    width: 100%;
+    padding: 20px 0;
+    background: #ffffff; /* change si ta maquette a une autre couleur */
+    color: #000000;
+    text-align: center;
+}
+
+.site-footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* espace entre les liens */
+    flex-wrap: wrap;
+}
+
+.site-footer a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: "Space Mono", monospace;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+div.footer-links span{
+    text-transform: uppercase;
+}
+
+/* MODALE PAGE CONTACT */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    width: 480px;
+    max-width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#contact-modal form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contact-modal input[type="text"],
+#contact-modal input[type="email"],
+#contact-modal input[type="tel"],
+#contact-modal textarea {
+    width: 80%;
+    max-width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.wpcf7-submit {
+    background: #ccc;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.modal-banner {
+    width: 100%;
+    padding: 5px 0;
+
+    font-size: 36px;
+ 
+    font-style:"Space Mono", monospace;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+
+
+   
+    overflow: hidden;        /* coupe sur les côtés comme ton image */
+}
+
+.modal-banner .banner-inner {
+    display: block;
+    word-break: break-all;   /* coupe n’importe où → même rendu que ton screenshot */
+}
+
+.modal-content{
+    padding: 0 !important;
+}

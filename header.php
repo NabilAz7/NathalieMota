@@ -10,7 +10,7 @@
 
     <header class="site-header">
         <div class="logo">
-            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo.png" alt="Logo Nathalie Mota">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/medias/logo.png" alt="Logo Nathalie Mota">
         </div>
 
         <nav class="main-menu">
@@ -24,5 +24,5 @@
     </header>
 
     <section class="hero">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/header.png" alt="Hero">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/medias/header.png" alt="Hero">
     </section>
