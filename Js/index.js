@@ -4,23 +4,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // OUVERTURE
     if (contactLink) {
-        contactLink.addEventListener("click", function(e){
+        contactLink.addEventListener("click", function (e) {
             e.preventDefault();
             modal.classList.add("open");
         });
     }
 
-    // FERMETURE
-    const closeBtn = document.querySelector(".modal-close");
-    if (closeBtn) {
-        closeBtn.addEventListener("click", function(){
-            modal.classList.remove("open");
-        });
-    }
-
+    // FERMETURE EN CLIQUANT À L'EXTÉRIEUR DE LA MODALE
     if (modal) {
-        modal.addEventListener("click", function(e){
-            if(e.target === modal){
+        modal.addEventListener("click", function (e) {
+            // Clique sur l’overlay uniquement, pas sur le contenu
+            if (e.target === modal) {
                 modal.classList.remove("open");
             }
         });

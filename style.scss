@@ -145,46 +145,46 @@ div.footer-links span{
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+     
 }
 
 #contact-modal input[type="text"],
 #contact-modal input[type="email"],
-#contact-modal input[type="tel"],
 #contact-modal textarea {
-    width: 80%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 250px;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .wpcf7-submit {
-    background: #ccc;
+    background:#D8D8D8;
     color: #000;
     border: none;
     padding: 10px 20px;
     border-radius: 0;
     cursor: pointer;
-    font-weight: bold;
+    width: 80%;
+    height: 50px;
+    font-family: "Space Mono", monospace;
 }
 
 
 .modal-banner {
-    width: 100%;
-    padding: 5px 0;
-
+    width: 120%;
+    padding: 5px;
+    margin-bottom: 25px;
     font-size: 36px;
  
-    font-style:"Space Mono", monospace;
+   font-family: "Space Mono", monospace;
     letter-spacing: 6px;
     text-transform: uppercase;
 
 
-   
-    overflow: hidden;        /* coupe sur les côtés comme ton image */
 }
 
 .modal-banner .banner-inner {
@@ -194,4 +194,19 @@ div.footer-links span{
 
 .modal-content{
     padding: 0 !important;
+    overflow: hidden;
+}
+
+.padding-banner{
+    padding-left: 5%;
+}
+ 
+
+ form.wpcf7-form.init p{
+    margin-top: 0px;
+    margin-bottom: 3px;
+
+ }
+#contact-modal textarea {
+    resize: none; /* interdit tout redimensionnement */
 }
