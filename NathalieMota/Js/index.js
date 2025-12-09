@@ -67,3 +67,56 @@ jQuery(document).ready(function($) {
     });
 
 });
+
+
+
+
+// Navigation avec prévisualisation des photos sur single-photo
+document.addEventListener('DOMContentLoaded', function() {
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    const previewImage = document.querySelector('.preview-image');
+    
+    // Vérifier qu'on est bien sur une page single-photo
+    if (!arrowLeft || !arrowRight || !previewImage) return;
+    
+    // Récupérer les données depuis les attributs data-*
+    const navContainer = document.querySelector('.nav-container');
+    const currentIndex = parseInt(navContainer.dataset.currentIndex);
+    const totalPosts = parseInt(navContainer.dataset.totalPosts);
+    
+    // Stocker les URLs et thumbnails
+    const prevUrl = arrowLeft.dataset.url;
+    const nextUrl = arrowRight.dataset.url;
+    const prevThumb = arrowLeft.dataset.thumbnail;
+    const nextThumb = arrowRight.dataset.thumbnail;
+    
+    // Fonction pour afficher la preview
+    function showPreview(thumbnailHtml) {
+        previewImage.innerHTML = thumbnailHtml;
+        previewImage.style.opacity = '1';
+        previewImage.style.visibility = 'visible';
+    }
+    
+    // Fonction pour cacher la preview
+    function hidePreview() {
+        previewImage.style.opacity = '0';
+        previewImage.style.visibility = 'hidden';
+    }
+    
+    // Events sur flèche droite
+    arrowRight.addEventListener('mouseenter', () => showPreview(nextThumb));
+    arrowRight.addEventListener('mouseleave', hidePreview);
+    arrowRight.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = nextUrl;
+    });
+    
+    // Events sur flèche gauche
+    arrowLeft.addEventListener('mouseenter', () => showPreview(prevThumb));
+    arrowLeft.addEventListener('mouseleave', hidePreview);
+    arrowLeft.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = prevUrl;
+    });
+});

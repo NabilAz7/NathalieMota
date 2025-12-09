@@ -303,9 +303,15 @@ div.footer-links span{
 /* --- STRUCTURE DE BASE --- */
 
 
+div.single-photo__right{
+position: relative;
+top: 2.8%;
+left: 0%;
+}
+
+
 .single-photo {
     max-width: 1600px;
-    margin-top: 2% !important;
     font-family: "Space Mono", monospace;
     padding-left: 5%;
     padding-right: 5%;
@@ -314,7 +320,7 @@ div.footer-links span{
 .single-photo__left{
     align-self:flex-end;
     position: relative;
-    top: 7%;
+    top: 0%;
     left: 0%;
 }
 
@@ -324,17 +330,20 @@ div.footer-links span{
     grid-template-columns: 1fr 1.2fr;
     gap: 60px;
     align-items: start;
+    
 }
 
 /* --- TITRE --- */
 .single-photo__title {
-    font-size: 42px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-size: 66px;
+    font-weight: 400;
+    letter-spacing: 0%;
     margin-bottom: 30px;
     white-space: pre-line; /* respecte les sauts de ligne */
     word-break: break-word; /* casse si trop long */
      font-family: "Space Mono", monospace;
+     font-style: italic;
+     line-height: 1; 
 
 }
 
@@ -368,8 +377,8 @@ h1.single-photo__title{
 .contact-btn {
     display: inline-block;
     margin-top: 20px;
-    padding: 14px 20px;
-    background: #ededed;
+    padding: 8px 15px;
+background: #D8D8D8; 
     border: 1px solid #ccc;
     font-size: 15px;
     cursor: pointer;
@@ -377,12 +386,13 @@ h1.single-photo__title{
     width: 100%;
     text-transform: uppercase;
     letter-spacing: 1px;
+  font-family: "Space Mono", monospace;
+  box-shadow: 0px 2px 1px 0px #00000005;
+  border-radius: 2px;
+
 }
 
-.contact-btn:hover {
-    background: #000;
-    color: #fff;
-}
+ 
 
 /* --- MINIATURES NAVIGATION --- */
 .single-photo__nav-thumbs {
@@ -399,14 +409,16 @@ h1.single-photo__title{
 
 /* --- RELATED PHOTOS --- */
 .related-photos {
-    margin-top: 120px;
+    margin-top: 100px;
 }
 
 .related-photos h2 {
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-size: 18px;
+    letter-spacing: 4px;
     margin-bottom: 40px;
     text-transform: uppercase;
+     font-weight: 400;
+    font-family: "Space Mono", monospace;
 }
 
 .related-photos__grid {
@@ -438,16 +450,19 @@ body.single-photo .hero {
  
     .separator-line-1 {
     display: block;
-    width: 110%;
+    width: 108%;
     border-bottom: 2px solid #000000;
     margin: 15px 0;
 }
 
  .separator-line-2 {
     display: block;
-    width: 234%;
+    width: 231%;
     border-bottom: 2px solid #000000;
     margin: 15px 0;
+    position: relative;
+    top: 40px;
+    left: 0px;
 }
 
 // CONTAINER BOUTON CONTACT
@@ -460,7 +475,8 @@ body.single-photo .hero {
 }
 
 .item2 {
-  width: 44%; /* prend seulement la place nécessaire */
+  width: 272px; /* prend seulement la place nécessaire */
+  height: 50px;
   position: relative;
   left: 45%;
 
@@ -473,119 +489,124 @@ li a{
     text-decoration: none;
 }
 
-// FLECHES DE NAVIGATION
-
-.single-photo__nav-thumbs {
-    display: flex;
-    justify-content: flex-end;
-    gap: 3px; /* espace entre flèches gauche et droite */
-    margin-top: 15px;
-}
-
-.single-photo__nav-thumbs .nav-thumb {
-    display: flex;
-    flex-direction: column; /* miniature au-dessus de la flèche (seulement droite) */
-    align-items: center;
-    text-decoration: none;
-    color: #000;
-    font-size: 32px;
-    transition: 0.2s;
-}
-
-.single-photo__nav-thumbs .nav-thumb:hover {
-    color: #000;
-}
-
-.single-photo__nav-thumbs .nav-thumb-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 17px; /* espace entre miniature et flèche */
-}
-
-.single-photo__nav-thumbs .nav-arrow {
-    display: block;
-    margin-top: 5px;
+div.single-photo__contact-wrapper{
     position: relative;
-    top: 0%;
-    left: 60%;
+    top: 10px;
+    left: 0px;
 }
-.single-photo__nav-thumbs {
-    text-align: center;
+ 
+ 
+
+// CONTAINER FLECHES 
+
+div.nav-container{
+    position: relative;
+    top: 20%;
+    left: -0.5%;
 }
 
-.single-photo__nav-thumbs {
-    text-align: center;
-}
 
-/* Conteneur global */
-.single-photo__nav-thumbs {
+/* Conteneur des flèches */
+/* Conteneur des flèches */
+
+.arrows-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 30px; /* espace entre les flèches */
+}
+
+/* Ligne (queue) de la flèche */
+.arrow {
+    position: relative;
+    width: 35px;        /* longueur de la queue */
+    height: 2px;         /* épaisseur ultra fine */
+    background: black;   /* couleur fine */
+    display: inline-block;
+}
+
+/* Chevron CREUX et fin */
+.arrow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 8px;        /* taille du chevron */
+    height: 8px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    background: transparent; /* chevron creux */
+}
+
+/* Flèche vers la gauche */
+.arrow-left::after {
+    left: 1px;                        /* place le chevron côté gauche */
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+/* Flèche vers la droite */
+.arrow-right::after {
+    right: 1px;                       /* place le chevron côté droit */
+    transform: translateY(-50%) rotate(45deg);
+}
+
+
+// MINIATURE AU SURVOL D'UN LIEN 
+
+ 
+
+
+ 
+/* Container de navigation */
+.single-photo__nav-thumbs {
     margin-top: 20px;
 }
 
-/* Conteneur qui regroupe image + flèches */
 .nav-container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     position: relative;
-    top: 0%;
-    left: 43%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
 }
 
-/* Image de preview */
+/* Image de preview - cachée par défaut, apparaît au survol des flèches */
+.preview-image {
+    position: absolute;
+    top: -75px; /* Position au-dessus des flèches - ajustez selon vos besoins */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; /* N'interfère pas avec les clics */
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    height: 77px;
+    width: 81px;
+
+ 
+}
+
 .preview-image img {
-    width: 90px;
+    display: block;
+    max-width: 110px; /* Taille de la miniature - ajustez selon vos besoins */
     height: auto;
-    border-radius: 4px;
-    margin-bottom: 18px; /* espace avec les flèches */
 }
 
-/* Conteneur des flèches */
+/* Container des flèches - garde votre disposition existante */
 .arrows-container {
     display: flex;
-    gap: 15px; /* espace entre les flèches */
-}
-/* Flèche gauche */
-.arrow-left {
-    display: inline-block;
-    width: 30px;           /* longueur de la barre */
-    height: 3px;           /* épaisseur de la barre */
-    background: #000;
-    position: relative;
+    gap: 50px; /* Espacement entre les flèches - ajustez selon vos besoins */
+    align-items: center;
 }
 
-.arrow-left::before {
-    content: "";
-    position: absolute;
-    left: -10px;           /* longueur de la pointe */
-    top: 50%;
-    transform: translateY(-50%);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-right: 10px solid #000; /* pointe vers la gauche */
+/* Style des flèches - garde votre design existant */
+.arrow {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
 }
 
-/* Flèche droite */
-.arrow-right {
-    display: inline-block;
-    width: 30px;           /* longueur de la barre */
-    height: 3px;
-    background: #000;
-    position: relative;
-}
-
-.arrow-right::before {
-    content: "";
-    position: absolute;
-    right: -10px;          /* longueur de la pointe */
-    top: 50%;
-    transform: translateY(-50%);
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-left: 10px solid #000; /* pointe vers la droite */
+.arrow:hover {
+    opacity: 0.7; /* Légère opacité au survol */
 }
