@@ -2,8 +2,8 @@
     <div class="modal-content">
 
         <div class="modal-banner">
-            CONTACTCONTACTCONTACTCONTACT
-            <span class="padding-banner"> CONTACTCONTACTCONTACTCONTACT</span>
+            CONTACTCONTACTCONTACT
+            <span class="padding-banner"> CONTACTCONTACTCONTACT </span>
         </div>
 
         <?php

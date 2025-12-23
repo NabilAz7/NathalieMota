@@ -16,7 +16,6 @@ get_header();
 
                     <ul class="single-photo__meta">
                         <li><strong>RÉFÉRENCE :</strong><?php echo esc_html(SCF::gets()['reference']); ?></li>
-
                         <li><strong>CATÉGORIE :</strong><?php the_terms(get_the_ID(), 'categorie'); ?></li>
                         <li><strong>FORMAT :</strong> <?php the_terms(get_the_ID(), 'format'); ?> </li>
                         <li><strong>TYPE :</strong> <?php echo esc_html(SCF::get('type')); ?></li>

@@ -1,56 +1,54 @@
- /*
+/*
 Theme Name: NathalieMota
 Template: twentytwentyfive
 */
 
- /* Menu principal */
+/* ===================================
+   BASE & RESET
+   =================================== */
+body { 
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
- .site-header {
-    max-width: 1470px;            /* largeur totale du header */ 
-    display: flex;                /* Place les éléments sur une même ligne */
-    justify-content: space-between;/* Logo à gauche — Menu à droite */
-    align-items: center;          /* Aligne verticalement */
-    padding: 2% 5% 2% 5%;
+/* ===================================
+   HEADER & NAVIGATION
+   =================================== */
+.site-header {
+    max-width: 1470px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5%;
     box-shadow: 0px 4px 14px 10px #00000008;
- 
-
-  
 }
 
 .main-menu ul {
-    display: flex;           /* Met les <li> sur une ligne */
-    list-style: none;        /* Supprime les puces */
-    margin: 0;               /* Supprime les marges par défaut */
-    padding: 0;              /* Supprime le padding par défaut */
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .main-menu li {
-    margin-right: 20px;      /* Espacement entre les items */
+    margin-right: 20px;
 }
 
 .main-menu li:last-child {
-    margin-right: 0;         /* Pas de marge après le dernier item */
+    margin-right: 0;
 }
 
-/* Optionnel : liens stylisés */
 .main-menu a {
-    text-decoration:none; 
-    color: #000;    /* Couleur des liens */
-    font-size: 16px;   
+    text-decoration: none; 
+    color: #000;
+    font-size: 16px;
     text-transform: uppercase;
     font-family: "Space Mono", monospace;
-
-       
-
 }
 
-/* Logo */
-
-
-
-
-/* Hero */
-/* HERO en pleine largeur */
+/* ===================================
+   HERO
+   =================================== */
 .hero {
     width: 100%;
     margin: 0;
@@ -60,17 +58,21 @@ Template: twentytwentyfive
 .hero img {
     width: 100%;
     height: auto;
-    display: block; /* enlève l’espace blanc sous l’image */
+    display: block;
 }
 
- 
+/* Cacher le hero sur les pages single photo */
+body.single-photo .hero {
+    display: none;
+}
 
- 
-/* FOOTER */
+/* ===================================
+   FOOTER
+   =================================== */
 .site-footer {
     width: 100%;
     padding: 20px 0;
-    background: #ffffff; /* change si ta maquette a une autre couleur */
+    background: #ffffff;
     color: #000000;
     text-align: center;
 }
@@ -78,7 +80,7 @@ Template: twentytwentyfive
 .site-footer .footer-links {
     display: flex;
     justify-content: center;
-    gap: 40px; /* espace entre les liens */
+    gap: 40px;
     flex-wrap: wrap;
 }
 
@@ -94,12 +96,15 @@ Template: twentytwentyfive
     text-decoration: underline;
 }
 
-div.footer-links span{
+div.footer-links span {
     text-transform: uppercase;
 }
 
-/* MODALE PAGE CONTACT */
-
+ 
+ 
+/* ===================================
+   MODALE CONTACT
+   =================================== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -107,7 +112,7 @@ div.footer-links span{
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -121,13 +126,17 @@ div.footer-links span{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 0 !important;
     background: #fff;
     border-radius: 8px;
     width: 480px;
     max-width: 90%;
+    height: auto;
+    max-height: 85vh;
     margin: 0 auto;
     position: relative;
+    overflow: hidden; /* Change de visible à hidden */
+     
 }
 
 .modal-close {
@@ -140,17 +149,43 @@ div.footer-links span{
     cursor: pointer;
 }
 
+.modal-banner {
+    width: 150%;
+    margin-bottom: 20px; /* Réduit de 25px à 20px */
+    font-size: 58px; /* Réduit de 36px à 28px */
+    font-family: monospace;
+    letter-spacing: 2px; /* Réduit de 6px à 5px */
+    text-transform: uppercase;
+    word-break: break-all;
+    height: 150px;
+    font-style: italic;
+}
+
+
+
+span.padding-banner{
+    margin-left: 5%;
+}
+
+/* Formulaire Contact Form 7 */
+ 
+
 #contact-modal form {
     width: 100%;
     max-width: 400px;
     display: flex;
     flex-direction: column;
-     
+    padding-bottom: 25px; /* Espace en bas de la modale */
 }
 
-#contact-modal input[type="text"],
-#contact-modal input[type="email"],
-#contact-modal textarea {
+#contact-modal .wpcf7-form p {
+    margin-top: 0;
+    margin-bottom: 0; /* Réduit de 3px à 0 */
+}
+
+#contact-modal input:not([type="submit"]),
+#contact-modal select {
+    display: block;
     width: 100%;
     max-width: 250px;
     padding: 8px;
@@ -158,267 +193,481 @@ div.footer-links span{
     border-radius: 8px;
     box-sizing: border-box;
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: -15px; /* Réduit de 15px à 8px */
+}
+
+#contact-modal textarea {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
+    height: 120px;
 }
 
 .wpcf7-submit {
-    background:#D8D8D8;
+    background: #D8D8D8;
     color: #000;
     border: none;
     padding: 10px 20px;
     border-radius: 0;
     cursor: pointer;
-    width: 80%;
+    width: 100%;
     height: 50px;
     font-family: "Space Mono", monospace;
+    position: relative;
+    top: -20px;
+    left: 0px;
 }
 
-
-.modal-banner {
-    width: 120%;
-    padding: 5px;
-    margin-bottom: 25px;
-    font-size: 36px;
- 
-   font-family: "Space Mono", monospace;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-
-
-}
-
-.modal-banner .banner-inner {
-    display: block;
-    word-break: break-all;   /* coupe n’importe où → même rendu que ton screenshot */
-}
-
-.modal-content{
-    padding: 0 !important;
-    overflow: hidden;
-}
-
-.padding-banner{
-    padding-left: 5%;
-}
- 
-
- form.wpcf7-form.init p{
-    margin-top: 0px;
-    margin-bottom: 3px;
-
- }
+#contact-modal input:not([type="submit"]),
+#contact-modal select,
 #contact-modal textarea {
-    resize: none; /* interdit tout redimensionnement */
+    max-width: 250px; /* Au lieu de 250px */
+     
 }
 
-/* Reset possible des <p> autour des champs CF7 pour éviter marges héritées */
-#contact-modal .wpcf7-form p {
-    margin: 0;
+.wpcf7-form p {
+  margin: 0;
 }
 
-/* Espacement entre tous les champs sauf le bouton envoyer */
-/* On cible les inputs (hors submit) et les selects si tu en as */
-#contact-modal .wpcf7-form input:not([type="submit"]),
-#contact-modal .wpcf7-form select {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px; /* <-- espace entre les champs */
-}
-
-/* Le textarea ne doit PAS avoir de marge en bas (collé au bouton) */
-#contact-modal .wpcf7-form textarea {
-    display: block;
-    width: 100%;
-    margin-bottom: 0; /* pas d'espace entre textarea et bouton */
-}
-
-/* S'assurer que le bouton n'ajoute pas d'espacement au dessus */
-#contact-modal .wpcf7-form .wpcf7-submit,
-#contact-modal .wpcf7-form input[type="submit"] {
-    margin-top: -5px;
-    display: block;
-    width: 100%;
+.wpcf7-form label {
+  margin-bottom: 15px !important;
 }
 
 
+.input-message {
+  margin-bottom: 15px; /* ajuste la valeur */
+}
 
 
-// GALERIE PHOTO
-/* Grille de la galerie */
-/* Conteneur de la galerie */
+/* ===================================
+   GALERIE PHOTO
+   =================================== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
     gap: 20px;
-
-    /* >>> Centrer la galerie <<< */
-    max-width: 800px;   /* largeur max (à ajuster selon ton design) */
-    margin: 50px auto;  /* centre le conteneur */
-
-    padding: 0 10px;    /* petit padding pour respires sur mobile */
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-/* Chaque photo occupe 100% de son container */
-.photo-block {
-    width: 100%; /* on laisse 100% pour que le grid gère */
-    
-}
-
-/* Image = pleine largeur + responsive */
-.photo-block img {
-    display: block;
+.photo-item {
     width: 100%;
-    aspect-ratio: 1 / 1;  /* carré parfait */
-    object-fit: cover; 
-    border-radius: 8px;
-    height: max-content;
+    height: 350px;
+    overflow: hidden;
+    position: relative;
 }
 
-
-// BOUTON CHARGER PLUS
-
-.load-more-container{
-    display: flex;
-    justify-content: center; /* centre horizontalement */
-    align-items: center;     /* centre verticalement (optionnel) */
-    flex-direction: column;  /* pas obligatoire, mais ok si tu veux empiler plusieurs éléments */
-    margin-top: 20px;        /* espace au-dessus si besoin */
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-// SECTION PHOTO APPARENTEES 
-
-.related-photos-grid {
+/* Bouton Charger Plus */
+.load-more-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#load-more{
+    width: 272px;
+    height: 50px;
+    font-size: 14px;
+    border: none;
+}
+
+  
+
+/* ===================================
+   FILTRES GALERIE - CUSTOM SELECT
+   =================================== */
+
+.gallery-filters {
+    max-width: 1200px;
+    margin: 40px 0px;
+    padding: 0 20px;
+}
+
+.filters-row {
+    display: flex;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    top: 0%;
+    left: 8%;
 }
 
-.photo-block {
-    flex: 1 1 calc(25% - 20px); /* 4 colonnes */
-    box-sizing: border-box;
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+    max-width: 272px;
+    position: relative;
+    top: 0%;
+    left: -2%;
 }
 
+ 
 
-/* ======= SINGLE PHOTO ======= */
-/* --- STRUCTURE DE BASE --- */
-
-
-div.single-photo__right{
-position: relative;
-top: 2.8%;
-left: 0%;
+div.custom-select-item.default{
+    font-weight: normal !important;
+}
+/* Gap spécifique avant le filtre "Trier par" */
+.filter-group:last-child {
+    position: relative;
+    top: 0%;
+    left: 10%;
 }
 
+/* Cacher le select natif */
+.filter-select {
+    display: none;
+}
 
+/* Custom Select Wrapper */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Display (partie visible) */
+.custom-select-display {
+    width: 79%;
+    padding: 12px 40px 12px 15px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+    font-family: "Space Mono", monospace;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #000;
+    position: relative;
+    user-select: none;
+}
+
+/* Flèche */
+/* Chevron au lieu de flèche triangulaire */
+.custom-select-display::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transition: transform 0.3s ease;
+}
+
+.custom-select-wrapper.open .custom-select-display::after {
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+/* Dropdown */
+.custom-select-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select-wrapper.open .custom-select-dropdown {
+    max-height: 300px;
+    opacity: 1;
+    overflow-y: auto;
+}
+
+/* Items du dropdown */
+.custom-select-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "Space Mono", monospace;
+    color: #000;
+    background: #fff;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* HOVER - Couleur rouge #E00000 */
+.custom-select-item:hover {
+    background: #FE5858; 
+    color: #fff;
+}
+
+/* Item sélectionné - Couleur rouge clair #FE5858 */
+.custom-select-item.active {
+    background: #E00000;
+    color: #fff;
+}
+
+/* Premier item (texte par défaut) */
+.custom-select-item.default {
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}
+
+/* Scrollbar personnalisée */
+.custom-select-dropdown::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-select-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.custom-select-dropdown::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 8px;
+}
+
+.custom-select-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Message aucune photo */
+.no-photos {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+ 
+ 
+
+/* ===================================
+   SINGLE PHOTO - STRUCTURE GÉNÉRALE
+   =================================== */
 .single-photo {
     max-width: 1600px;
     font-family: "Space Mono", monospace;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 0 5%;
 }
 
-.single-photo__left{
-    align-self:flex-end;
-    position: relative;
-    top: 0%;
-    left: 0%;
-}
-
-/* --- WRAPPER EN 2 COLONNES --- */
 .single-photo__wrapper {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     gap: 60px;
     align-items: start;
-    
 }
 
-/* --- TITRE --- */
+/* ===================================
+   SINGLE PHOTO - COLONNE GAUCHE
+   =================================== */
+.single-photo__left {
+    align-self: flex-end;
+}
+
 .single-photo__title {
     font-size: 66px;
     font-weight: 400;
+    font-family: "Space Mono", monospace;
+    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
     letter-spacing: 0%;
     margin-bottom: 30px;
-    white-space: pre-line; /* respecte les sauts de ligne */
-    word-break: break-word; /* casse si trop long */
-     font-family: "Space Mono", monospace;
-     font-style: italic;
-     line-height: 1; 
-
+    white-space: pre-line;
+    word-break: break-word;
 }
 
-h1.single-photo__title{
-     font-family: "Space Mono", monospace;
-     text-transform: uppercase;
-}
-/* --- META --- */
 .single-photo__meta {
     list-style: none;
     padding: 0;
     margin: 0 0 40px 0;
     line-height: 2;
-}
-
-
-
-/* --- PHOTO PRINCIPALE --- */
-.single-photo__image {
-    width: 100%;
-    border-radius: 4px;
-    object-fit: cover;
+    text-transform: uppercase;
 }
 
 .single-photo__meta strong {
     font-weight: normal !important;
 }
 
-
-/* --- BOUTON CONTACT --- */
-.contact-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 8px 15px;
-background: #D8D8D8; 
-    border: 1px solid #ccc;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  font-family: "Space Mono", monospace;
-  box-shadow: 0px 2px 1px 0px #00000005;
-  border-radius: 2px;
-
+.single-photo__meta a {
+    color: #000;
+    text-decoration: none;
 }
 
- 
+/* Lignes séparatrices */
+.separator-line-1 {
+    display: block;
+    width: 108%;
+    border-bottom: 2px solid #000000;
+    margin-bottom: 5.1%;
+}
 
-/* --- MINIATURES NAVIGATION --- */
+.separator-line-2 {
+    display: block;
+    width: 231%;
+    border-bottom: 2px solid #000000;
+    margin: 15px 0;
+    position: relative;
+    top: 40px;
+}
+
+/* Wrapper bouton contact */ 
+
+.single-photo__contact-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 22.4% !important; /* Force le gap */
+    width: 100%;
+    margin-left: 0;
+}
+
+.contact-text,
+span.item1 {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 14px;
+    margin-right: 0; /* Supprime toute marge qui pourrait interférer */
+}
+
+.contact-btn {
+    width: 272px;
+    height: 50px;
+    flex-shrink: 0;
+    margin-left: 0; /* Supprime toute marge qui pourrait interférer */
+    border: none;
+}
+/* ===================================
+   SINGLE PHOTO - COLONNE DROITE
+   =================================== */
+.single-photo__right {
+    position: relative;
+    top: 2.8%;
+}
+
+.single-photo__image {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* ===================================
+   SINGLE PHOTO - NAVIGATION FLÈCHES
+   =================================== */
 .single-photo__nav-thumbs {
     display: flex;
     justify-content: flex-end;
     margin-top: 15px;
 }
 
-.single-photo__nav-thumbs div a img {
-    width: 70px;
-    height: auto;
-    border: 1px solid #ddd;
+.nav-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    top: 20%;
+    left: -0.5%;
 }
 
-/* --- RELATED PHOTOS --- */
+.arrows-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Ligne (queue) de la flèche */
+.arrow {
+    position: relative;
+    width: 35px;
+    height: 2px;
+    background: black;
+    display: inline-block;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.arrow:hover {
+    opacity: 0.7;
+}
+
+/* Chevron creux et fin */
+.arrow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    background: transparent;
+}
+
+.arrow-left::after {
+    left: 1px;
+    transform: translateY(-50%) rotate(-135deg);
+}
+
+.arrow-right::after {
+    right: 1px;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* Image de preview au survol */
+.preview-image {
+    position: absolute;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 81px;
+    height: 77px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.preview-image img {
+    display: block;
+    max-width: 110px;
+    height: auto;
+}
+
+/* ===================================
+   SINGLE PHOTO - PHOTOS APPARENTÉES
+   =================================== */
 .related-photos {
     margin-top: 100px;
 }
 
 .related-photos h2 {
     font-size: 18px;
-    letter-spacing: 4px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-     font-weight: 400;
+    font-weight: 400;
     font-family: "Space Mono", monospace;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
 }
 
 .related-photos__grid {
@@ -432,181 +681,4 @@ background: #D8D8D8;
     height: 380px;
     object-fit: cover;
     border-radius: 4px;
-}
-
-// PADDING
-
- body { 
- padding: 0% !important;
-   margin: 0% !important;
- }
-     
- 
-/* Cacher le hero header uniquement sur les pages single de type "photo" */
-body.single-photo .hero {
-    display: none;
-}
-// LIGNE SEPARATRICE 
- 
-    .separator-line-1 {
-    display: block;
-    width: 108%;
-    border-bottom: 2px solid #000000;
-    margin: 15px 0;
-}
-
- .separator-line-2 {
-    display: block;
-    width: 231%;
-    border-bottom: 2px solid #000000;
-    margin: 15px 0;
-    position: relative;
-    top: 40px;
-    left: 0px;
-}
-
-// CONTAINER BOUTON CONTACT
-
-.item1 {
-  width: 20%; /* prend tout l'espace disponible */
-  white-space: nowrap;
- font-size: 14px;
-
-}
-
-.item2 {
-  width: 272px; /* prend seulement la place nécessaire */
-  height: 50px;
-  position: relative;
-  left: 45%;
-
-}
-
-// COLONNE DE GAUCHE 
-
-li a{
-    color: #000;
-    text-decoration: none;
-}
-
-div.single-photo__contact-wrapper{
-    position: relative;
-    top: 10px;
-    left: 0px;
-}
- 
- 
-
-// CONTAINER FLECHES 
-
-div.nav-container{
-    position: relative;
-    top: 20%;
-    left: -0.5%;
-}
-
-
-/* Conteneur des flèches */
-/* Conteneur des flèches */
-
-.arrows-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px; /* espace entre les flèches */
-}
-
-/* Ligne (queue) de la flèche */
-.arrow {
-    position: relative;
-    width: 35px;        /* longueur de la queue */
-    height: 2px;         /* épaisseur ultra fine */
-    background: black;   /* couleur fine */
-    display: inline-block;
-}
-
-/* Chevron CREUX et fin */
-.arrow::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 8px;        /* taille du chevron */
-    height: 8px;
-    border-top: 2px solid black;
-    border-right: 2px solid black;
-    background: transparent; /* chevron creux */
-}
-
-/* Flèche vers la gauche */
-.arrow-left::after {
-    left: 1px;                        /* place le chevron côté gauche */
-    transform: translateY(-50%) rotate(-135deg);
-}
-
-/* Flèche vers la droite */
-.arrow-right::after {
-    right: 1px;                       /* place le chevron côté droit */
-    transform: translateY(-50%) rotate(45deg);
-}
-
-
-// MINIATURE AU SURVOL D'UN LIEN 
-
- 
-
-
- 
-/* Container de navigation */
-.single-photo__nav-thumbs {
-    margin-top: 20px;
-}
-
-.nav-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0;
-}
-
-/* Image de preview - cachée par défaut, apparaît au survol des flèches */
-.preview-image {
-    position: absolute;
-    top: -75px; /* Position au-dessus des flèches - ajustez selon vos besoins */
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none; /* N'interfère pas avec les clics */
-    z-index: 100;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    height: 77px;
-    width: 81px;
-
- 
-}
-
-.preview-image img {
-    display: block;
-    max-width: 110px; /* Taille de la miniature - ajustez selon vos besoins */
-    height: auto;
-}
-
-/* Container des flèches - garde votre disposition existante */
-.arrows-container {
-    display: flex;
-    gap: 50px; /* Espacement entre les flèches - ajustez selon vos besoins */
-    align-items: center;
-}
-
-/* Style des flèches - garde votre design existant */
-.arrow {
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-}
-
-.arrow:hover {
-    opacity: 0.7; /* Légère opacité au survol */
 }

@@ -6,12 +6,16 @@ get_header();
 
     <section class="home-gallery">
 
+        <!-- Filtres -->
+        <?php get_template_part('template-parts/filters'); ?>
+
         <div class="gallery-grid" id="photo-container">
             <?php
-            // WP_Query - On charge les 6 premières photos
+            // WP_Query - On charge les 8 premières photos
             $photos = new WP_Query([
                 'post_type'      => 'photo',
-                'posts_per_page' => 6,
+                'posts_per_page' => 8,
+                'paged'          => 1,
                 'orderby'        => 'date',
                 'order'          => 'DESC'
             ]);
@@ -21,7 +25,9 @@ get_header();
                     get_template_part('template-parts/photo-block');
                 endwhile;
                 wp_reset_postdata();
-            endif;
+            else : ?>
+                <p class="no-photos">Aucune photo trouvée.</p>
+            <?php endif;
 
             // On calcule le nombre total de pages
             $total_pages = $photos->max_num_pages;
@@ -33,8 +39,8 @@ get_header();
             <div class="load-more-container">
                 <button id="load-more"
                     class="load-more-btn"
-                    data-page="1"
-                    data-max="<?php echo $total_pages; ?>">
+                    data-page="2"
+                    data-max="<?php echo esc_attr($total_pages); ?>">
                     Charger plus
                 </button>
             </div>
