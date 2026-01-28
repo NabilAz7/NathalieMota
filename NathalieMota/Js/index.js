@@ -57,6 +57,9 @@ jQuery(document).ready(function($) {
 
                 currentPage = page;
 
+                // ⭐ DÉCLENCHER L'ÉVÉNEMENT POUR LA LIGHTBOX ⭐
+                document.dispatchEvent(new Event('photosLoaded'));
+
                 // Gérer l'affichage du bouton "Charger plus"
                 if (button.length) {
                     button.removeClass('loading').text('Charger plus');
@@ -158,8 +161,6 @@ jQuery(document).ready(function($) {
 // PREVIEW IMAGE SUR FLÈCHES NAVIGATION
 // ====================================
 
-
-// Navigation avec prévisualisation des photos sur single-photo
 document.addEventListener('DOMContentLoaded', function() {
     const arrowLeft = document.querySelector('.arrow-left');
     const arrowRight = document.querySelector('.arrow-right');
@@ -168,22 +169,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Vérifier qu'on est bien sur une page single-photo
     if (!arrowLeft || !arrowRight || !previewImage) return;
     
-    // Récupérer les données depuis les attributs data-*
-    const navContainer = document.querySelector('.nav-container');
-    const currentIndex = parseInt(navContainer.dataset.currentIndex);
-    const totalPosts = parseInt(navContainer.dataset.totalPosts);
-    
-    // Stocker les URLs et thumbnails
-    const prevUrl = arrowLeft.dataset.url;
-    const nextUrl = arrowRight.dataset.url;
-    const prevThumb = arrowLeft.dataset.thumbnail;
-    const nextThumb = arrowRight.dataset.thumbnail;
-    
     // Fonction pour afficher la preview
-    function showPreview(thumbnailHtml) {
-        previewImage.innerHTML = thumbnailHtml;
-        previewImage.style.opacity = '1';
-        previewImage.style.visibility = 'visible';
+    function showPreview(arrow) {
+        const thumbnailHtml = arrow.dataset.thumbnail;
+        if (thumbnailHtml) {
+            previewImage.innerHTML = thumbnailHtml;
+            previewImage.style.opacity = '1';
+            previewImage.style.visibility = 'visible';
+        }
     }
     
     // Fonction pour cacher la preview
@@ -193,18 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Events sur flèche droite
-    arrowRight.addEventListener('mouseenter', () => showPreview(nextThumb));
+    arrowRight.addEventListener('mouseenter', () => showPreview(arrowRight));
     arrowRight.addEventListener('mouseleave', hidePreview);
-    arrowRight.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = nextUrl;
-    });
     
     // Events sur flèche gauche
-    arrowLeft.addEventListener('mouseenter', () => showPreview(prevThumb));
+    arrowLeft.addEventListener('mouseenter', () => showPreview(arrowLeft));
     arrowLeft.addEventListener('mouseleave', hidePreview);
-    arrowLeft.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = prevUrl;
-    });
+    
+    // Pas besoin de gérer le clic, le href du lien <a> s'en charge
 });

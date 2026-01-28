@@ -9,7 +9,7 @@ get_header();
         <!-- Filtres -->
         <?php get_template_part('template-parts/filters'); ?>
 
-        <div class="gallery-grid" id="photo-container">
+        <div id="photo-container" class="gallery-grid">
             <?php
             // WP_Query - On charge les 8 premières photos
             $photos = new WP_Query([

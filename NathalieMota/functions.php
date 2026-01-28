@@ -47,12 +47,21 @@ function theme_enqueue_scripts()
         true
     );
 
-    // Charger ton fichier JS principal APRES le custom select
+    // Charger le fichier JS principal APRÈS le custom select
     wp_enqueue_script(
         'theme-js',
         get_stylesheet_directory_uri() . '/js/index.js',
-        ['jquery', 'custom-select'], // Dépend de custom-select
+        ['jquery', 'custom-select'],
         filemtime(get_stylesheet_directory() . '/js/index.js'),
+        true
+    );
+
+    // Script Lightbox
+    wp_enqueue_script(
+        'nathaliemota-lightbox',
+        get_stylesheet_directory_uri() . '/js/lightbox.js',
+        array(),
+        filemtime(get_stylesheet_directory() . '/js/lightbox.js'),
         true
     );
 
@@ -95,40 +104,7 @@ add_action('wp_enqueue_scripts', 'enqueue_font_awesome');
 
 
 // ====================================
-// AJAX - CHARGER PLUS DE PHOTOS
-// ====================================
-
-function load_more_photos()
-{
-    // Récupère la page demandée
-    $page = isset($_POST['page']) ? intval($_POST['page']) : 2;
-
-    // Arguments de la requête
-    $args = array(
-        'post_type'      => 'photo',
-        'posts_per_page' => 8,
-        'paged'          => $page,
-        'orderby'        => 'date',
-        'order'          => 'DESC'
-    );
-
-    $query = new WP_Query($args);
-
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            get_template_part('template-parts/photo-block');
-        }
-    }
-
-    wp_reset_postdata();
-    wp_die();
-}
-add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
-
-// ====================================
-// AJAX - FILTRER LES PHOTOS
+// AJAX - CHARGER ET FILTRER LES PHOTOS
 // ====================================
 
 function filter_photos()
@@ -183,7 +159,7 @@ function filter_photos()
 
     wp_reset_postdata();
 
-    // Retourne aussi le nombre total de pages pour le bouton "Charger plus"
+    // Retourne le nombre total de pages pour le bouton "Charger plus"
     echo '<!--MAX_PAGES:' . $query->max_num_pages . '-->';
 
     wp_die();

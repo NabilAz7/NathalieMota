@@ -46,6 +46,9 @@ body {
     font-family: "Space Mono", monospace;
 }
 
+.main-menu a:hover{
+    font-weight: 700;
+}
 /* ===================================
    HERO
    =================================== */
@@ -71,7 +74,7 @@ body.single-photo .hero {
    =================================== */
 .site-footer {
     width: 100%;
-    padding: 20px 0;
+    padding: 12% 0;
     background: #ffffff;
     color: #000000;
     text-align: center;
@@ -80,9 +83,13 @@ body.single-photo .hero {
 .site-footer .footer-links {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 65px;
     flex-wrap: wrap;
 }
+
+ .site-footer a:hover{
+    font-weight: 700;
+ }
 
 .site-footer a {
     color: #000000;
@@ -100,8 +107,23 @@ div.footer-links span {
     text-transform: uppercase;
 }
 
- 
- 
+.site-footer {
+    padding: 1%;
+    position: relative;
+    margin-top: 4.5%;
+}
+
+.site-footer::before {
+    content: '';
+    display: block;
+    width: 100%; /* Ajustez selon vos besoins */
+    height: 1.5px;
+    background-color: #000000;
+    position: absolute;
+    top: 0;
+    left: 49%; /* Centre la ligne */
+    transform: translateX(-50%);
+}
 /* ===================================
    MODALE CONTACT
    =================================== */
@@ -159,13 +181,16 @@ div.footer-links span {
     word-break: break-all;
     height: 150px;
     font-style: italic;
+    line-height: 50px;
 }
 
 
 
 span.padding-banner{
     margin-left: 5%;
+    
 }
+
 
 /* Formulaire Contact Form 7 */
  
@@ -224,10 +249,18 @@ span.padding-banner{
     left: 0px;
 }
 
+.wpcf7-submit:hover{
+
+    background-color: #000;
+    color: white;
+}
+
+
 #contact-modal input:not([type="submit"]),
 #contact-modal select,
 #contact-modal textarea {
     max-width: 250px; /* Au lieu de 250px */
+    margin-bottom: 15px;
      
 }
 
@@ -243,6 +276,7 @@ span.padding-banner{
 .input-message {
   margin-bottom: 15px; /* ajuste la valeur */
 }
+
 
 
 /* ===================================
@@ -284,8 +318,13 @@ span.padding-banner{
     height: 50px;
     font-size: 14px;
     border: none;
+    cursor: pointer;
 }
 
+#load-more:hover {
+    background-color: black;
+    color: white;
+}
   
 
 /* ===================================
@@ -515,7 +554,7 @@ div.custom-select-item.default{
 /* Lignes séparatrices */
 .separator-line-1 {
     display: block;
-    width: 108%;
+    width: 115%;
     border-bottom: 2px solid #000000;
     margin-bottom: 5.1%;
 }
@@ -553,6 +592,13 @@ span.item1 {
     flex-shrink: 0;
     margin-left: 0; /* Supprime toute marge qui pourrait interférer */
     border: none;
+    cursor: pointer;
+}
+
+
+.contact-btn:hover {
+    background-color: black;
+    color: white;
 }
 /* ===================================
    SINGLE PHOTO - COLONNE DROITE
@@ -681,4 +727,583 @@ span.item1 {
     height: 380px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+/* ===================================
+   LIGHTBOX
+   =================================== */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+.lightbox-container {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Informations photo */
+.lightbox-info {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    z-index: 10002;
+}
+
+.lightbox-reference {
+    text-align: left;
+}
+
+.lightbox-category {
+    text-align: right;
+}
+
+/* Image principale */
+.lightbox-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 80%;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* Bouton fermeture */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 10001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.lightbox-close:hover {
+    opacity: 0.7;
+}
+
+/* Navigation flèches après avoir cliqué sur fullscreen  */
+/* Navigation flèches après avoir cliqué sur fullscreen */
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.lightbox-prev { 
+    left: 20px; 
+}
+
+.lightbox-next { 
+    right: 20px;
+    flex-direction: row-reverse;
+}
+
+/* Wrapper du texte - ne s'agrandit pas */
+.nav-text-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Texte de navigation */
+.nav-text {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Space Mono", monospace;
+    color: white;
+    white-space: nowrap;
+}
+
+.lightbox-prev .nav-text {
+    margin-left: 30px;
+}
+
+.lightbox-prev .nav-text:hover {
+    font-weight: 700;
+}
+
+.lightbox-next .nav-text {
+    margin-right: 25px;
+}
+
+.lightbox-next .nav-text:hover {
+    font-weight: 700;
+}
+
+/* Wrapper de la flèche - s'agrandit au survol */
+.nav-arrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.lightbox-prev:hover .nav-arrow-wrapper,
+.lightbox-next:hover .nav-arrow-wrapper {
+    transform: scale(1.2);
+}
+
+/* Conteneur de la flèche */
+.nav-arrow {
+    display: flex;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+/* Flèche gauche */
+.lightbox-prev .nav-arrow::before {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background: white;
+    left: 0;
+    top: 48%;
+}
+
+.lightbox-prev .nav-arrow::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+    left: 0;
+    top: 35%;
+}
+
+/* Flèche droite */
+.lightbox-next .nav-arrow::before {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 2px;
+    background: white;
+    right: 0;
+    top: 48%;
+}
+
+.lightbox-next .nav-arrow::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg);
+    right: 0;
+    top: 35%;
+}
+
+////////////
+/* Informations photo */
+.lightbox-info {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    font-family: "Space Mono", monospace;
+    z-index: 10001;
+}
+
+.lightbox-title {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.lightbox-category {
+    font-size: 14px;
+    opacity: 0.8;
+    text-transform: uppercase;
+    color: white;
+}
+ 
+
+/* ===================================
+   PHOTO BLOCK AVEC OVERLAY ET ICÔNES
+   =================================== */
+.photo-block {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.photo-link {
+    display: block;
+}
+
+.photo-block img {
+    display: block;
+    width: 100%;
+    height: 400px; /* Hauteur fixe */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Overlay au survol */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.photo-block:hover .photo-overlay {
+    opacity: 1;
+}
+
+.photo-block:hover img {
+    transform: scale(1.05);
+}
+
+/* Icônes */
+.photo-eye-icon,
+.fullscreen-icon {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 5px;
+}
+
+/* Œil au centre */
+.photo-eye-icon {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.photo-eye-icon:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Fullscreen en haut à droite */
+.fullscreen-icon {
+    top: 10px;
+    right: 10%;
+    background-color: black;
+    border-radius: 50%; /* Crée la forme ronde */
+    width: 30px; /* Ajustez selon la taille de votre icône */
+    height: 30px; /* Doit être égal à la largeur pour un cercle parfait */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen-icon svg {
+    width: 18px; /* Ajustez selon vos besoins */
+    height: 18px;
+}
+
+.fullscreen-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Informations photo */
+.photo-info {
+    /* On enlève le positionnement global */
+    display: contents; /* Permet aux enfants d'être positionnés individuellement */
+}
+
+/* Titre en bas à gauche */
+.photo-title {
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+    color: white;
+    font-family: "Space Mono", monospace;
+    text-transform: uppercase;
+}
+
+/* Catégorie en bas à droite */
+.photo-category {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    font-size: 12px;
+    margin: 0;
+    color: white;
+    font-family: "Space Mono", monospace;
+    text-transform: uppercase;
+}
+
+// RESPONSIVE MOBILE
+
+
+// GALLERIE PHOTO
+
+@media (max-width: 415px) {
+
+  .gallery-grid{
+    grid-template-columns: repeat(1, 1fr)
+
+  }
+}
+
+// MENU ENTËTE
+
+@media (max-width: 415px) {
+
+  div.logo img{
+        max-width: 120px;
+  }
+
+   .main-menu a{
+        font-size: 12px;
+  }
+}
+
+// FILTRES PAGE ACCEUIL
+
+@media (max-width: 415px) {
+
+  .filter-group:last-child{
+         top: 0%;
+         left: -2%;
+  }
+
+  .filters-row{
+    left:0%;
+  }
+  }
+
+//   FOOTER
+
+    @media (max-width: 415px) {
+
+  .footer-links{
+        flex-direction: column;
+        gap: 25px !important;
+        margin: 10% 0%;
+  }
+}
+
+ @media (max-width: 415px) {
+
+  #load-more{
+    margin: 8%;
+         
+  }
+}
+
+@media (max-width: 415px) {
+
+  .single-photo__wrapper{
+    display: flex;
+    flex-direction: column-reverse;
+         
+  }
+
+   
+}
+ 
+
+@media (max-width: 415px) {
+
+  .single-photo__left {
+       position: relative;
+        top: -90px;
+        left: 1%;
+         
+  }
+   }
+
+  
+
+   @media (max-width: 415px) {
+
+  .nav-container {
+    display: none;
+         
+  }
+   }
+
+
+ @media (max-width: 415px) {
+
+  .single-photo__image{
+    width: 265px;
+    height: 397px;
+    margin-top: 10%;
+    position: relative;
+    top: 0%;
+    left: 22%;
+         
+  }
+   }
+    
+
+    @media (max-width: 415px) {
+
+   .single-photo__contact-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 25px !important;
+    position: relative;
+        top: 0%;
+        left: -20%;
+         
+  }
+   }
+
+    @media (max-width: 415px) {
+
+    .separator-line-1{
+    position: relative;
+    top: 0%;
+    left: -27.8%;
+         
+  }
+   }
+
+   
+    @media (max-width: 415px) {
+
+    .separator-line-2{
+    position: relative;
+    top: 0%;
+    left: -29%;
+         
+  }
+   }
+
+@media (max-width: 415px) {
+
+    .related-photos h2{
+    position: relative;
+    top: -20vh;
+    left: 11%;
+         
+  }
+   }
+
+
+   
+
+   @media (max-width: 415px) {
+
+    .related-photos__grid {
+     display: flex;
+     flex-direction: column;
+     margin-top: 0%;
+     position: relative;
+     top: -20vh;
+     left: -2%;
+     
+         
+  }
+   }
+
+
+
+   @media (max-width: 415px) {
+
+    section.related-photos {
+   
+      margin-left: 6%;
+       position: relative;
+       top: -10%;
+       left: 0%;
+       height: 750px;
+      
+         
+  }
+   }
+
+
+
+   
+ @media (max-width: 415px) {
+
+    .photo-overlay {
+
+   position: relative;
+   top: 0%;
+   left: 0%;
+      
+         
+  }
+   }
+    
+   @media (max-width: 768px) {
+    .fullscreen-icon {
+        background-color: red !important; // ← Pour voir si l'icône apparaît
+        border: 5px solid yellow !important;
+        width: 50px !important;
+        height: 50px !important;
+        z-index: 99999 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        top:5px;
+        right:5px ;
+    }
 }
