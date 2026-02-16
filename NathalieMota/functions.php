@@ -56,6 +56,15 @@ function theme_enqueue_scripts()
         true
     );
 
+    // Charger le menu burger
+    wp_enqueue_script(
+        'menu-burger',
+        get_stylesheet_directory_uri() . '/js/menu.js',
+        ['jquery'],
+        filemtime(get_stylesheet_directory() . '/js/menu.js'),
+        true
+    );
+
     // Script Lightbox
     wp_enqueue_script(
         'nathaliemota-lightbox',
@@ -64,6 +73,20 @@ function theme_enqueue_scripts()
         filemtime(get_stylesheet_directory() . '/js/lightbox.js'),
         true
     );
+
+    // ✅ NOUVEAU : Script pour le layout mobile des pages single photo
+    if (is_singular('photo')) { // Seulement sur les pages single photo
+        wp_enqueue_script(
+            'single-photo-layout',
+            get_stylesheet_directory_uri() . '/js/single-photo-layout.js',
+            array(),
+            filemtime(get_stylesheet_directory() . '/js/single-photo-layout.js'),
+            true
+        );
+    }
+
+
+
 
     // Envoi des données AJAX à index.js
     wp_localize_script('theme-js', 'ajaxObject', [

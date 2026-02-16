@@ -2,7 +2,33 @@
 get_header();
 ?>
 
-<main class="single-photo">
+<?php
+// Récupérer les catégories AVANT le <main>
+$categories = get_the_terms(get_the_ID(), 'categorie');
+$page_class = 'single-photo';
+
+if ($categories && !is_wp_error($categories)) {
+    foreach ($categories as $category) {
+        $cat_name = strtolower($category->name);
+        $cat_slug = strtolower($category->slug);
+
+        if (
+            $cat_name === 'mariée' ||
+            $cat_name === 'mariee' ||
+            $cat_name === 'mariage' ||
+            $cat_slug === 'mariee' ||
+            $cat_slug === 'mariée' ||
+            $cat_slug === 'mariage' ||
+            strpos($cat_name, 'mari') !== false
+        ) {
+            $page_class .= ' page-mariage';
+            break;
+        }
+    }
+}
+?>
+
+<main class="<?php echo $page_class; ?>">
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -40,7 +66,35 @@ get_header();
 
                 <!-- COLONNE DROITE (PHOTO PRINCIPALE) -->
                 <div class="single-photo__right">
-                    <?php the_post_thumbnail('large', ['class' => 'single-photo__image']); ?>
+                    <?php
+                    // Récupérer les catégories du post actuel
+                    $categories = get_the_terms(get_the_ID(), 'categorie');
+                    $cat_class = '';
+
+                    // Vérifier si la catégorie "Mariage" existe
+                    if ($categories && !is_wp_error($categories)) {
+                        foreach ($categories as $category) {
+                            $cat_name = strtolower($category->name);
+                            $cat_slug = strtolower($category->slug);
+
+                            if (
+                                $cat_name === 'mariée' ||
+                                $cat_name === 'mariee' ||
+                                $cat_name === 'mariage' ||
+                                $cat_slug === 'mariee' ||
+                                $cat_slug === 'mariée' ||
+                                $cat_slug === 'mariage' ||
+                                strpos($cat_name, 'mari') !== false
+                            ) {
+                                $cat_class = 'photo-mariee';
+                                break;
+                            }
+                        }
+                    }
+
+                    // Ajouter la classe à l'image
+                    the_post_thumbnail('large', ['class' => 'single-photo__image ' . $cat_class]);
+                    ?>
 
 
 
