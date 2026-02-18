@@ -2,33 +2,7 @@
 get_header();
 ?>
 
-<?php
-// Récupérer les catégories AVANT le <main>
-$categories = get_the_terms(get_the_ID(), 'categorie');
-$page_class = 'single-photo';
-
-if ($categories && !is_wp_error($categories)) {
-    foreach ($categories as $category) {
-        $cat_name = strtolower($category->name);
-        $cat_slug = strtolower($category->slug);
-
-        if (
-            $cat_name === 'mariée' ||
-            $cat_name === 'mariee' ||
-            $cat_name === 'mariage' ||
-            $cat_slug === 'mariee' ||
-            $cat_slug === 'mariée' ||
-            $cat_slug === 'mariage' ||
-            strpos($cat_name, 'mari') !== false
-        ) {
-            $page_class .= ' page-mariage';
-            break;
-        }
-    }
-}
-?>
-
-<main class="<?php echo $page_class; ?>">
+<main class="single-photo">
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -41,123 +15,75 @@ if ($categories && !is_wp_error($categories)) {
                     </h1>
 
                     <ul class="single-photo__meta">
-                        <li><strong>RÉFÉRENCE :</strong><?php echo esc_html(SCF::gets()['reference']); ?></li>
-                        <li><strong>CATÉGORIE :</strong><?php the_terms(get_the_ID(), 'categorie'); ?></li>
-                        <li><strong>FORMAT :</strong> <?php the_terms(get_the_ID(), 'format'); ?> </li>
+                        <li><strong>RÉFÉRENCE :</strong> <?php echo esc_html(SCF::gets()['reference']); ?></li>
+                        <li><strong>CATÉGORIE :</strong> <?php the_terms(get_the_ID(), 'categorie'); ?></li>
+                        <li><strong>FORMAT :</strong> <?php the_terms(get_the_ID(), 'format'); ?></li>
                         <li><strong>TYPE :</strong> <?php echo esc_html(SCF::get('type')); ?></li>
                         <li><strong>ANNÉE :</strong> <?php echo esc_html(SCF::get('annee')); ?></li>
-
                     </ul>
-
 
                     <span class="separator-line-1"></span>
 
-                    <!-- Texte + bouton côte à côte -->
-                    <div class="single-photo__contact-wrapper" style="display: flex; align-items: center; gap: 10px;">
+                    <div class="single-photo__contact-wrapper">
                         <span class="item1">Cette photo vous intéresse ?</span>
                         <button class="contact-btn item2" data-ref="<?php echo esc_attr(get_post_meta(get_the_ID(), 'reference', true)); ?>">
                             Contact
                         </button>
                     </div>
-                    <span class="separator-line-2"></span>
 
-                </div>
-
+                </div><!-- fin .single-photo__left -->
 
                 <!-- COLONNE DROITE (PHOTO PRINCIPALE) -->
                 <div class="single-photo__right">
-                    <?php
-                    // Récupérer les catégories du post actuel
-                    $categories = get_the_terms(get_the_ID(), 'categorie');
-                    $cat_class = '';
 
-                    // Vérifier si la catégorie "Mariage" existe
-                    if ($categories && !is_wp_error($categories)) {
-                        foreach ($categories as $category) {
-                            $cat_name = strtolower($category->name);
-                            $cat_slug = strtolower($category->slug);
+                    <?php the_post_thumbnail('large', ['class' => 'single-photo__image']); ?>
 
-                            if (
-                                $cat_name === 'mariée' ||
-                                $cat_name === 'mariee' ||
-                                $cat_name === 'mariage' ||
-                                $cat_slug === 'mariee' ||
-                                $cat_slug === 'mariée' ||
-                                $cat_slug === 'mariage' ||
-                                strpos($cat_name, 'mari') !== false
-                            ) {
-                                $cat_class = 'photo-mariee';
-                                break;
-                            }
-                        }
-                    }
-
-                    // Ajouter la classe à l'image
-                    the_post_thumbnail('large', ['class' => 'single-photo__image ' . $cat_class]);
-                    ?>
-
-
-
-
-                    <!-- NAVIGATION MINIATURE SOUS L'IMAGE PRINCIPALE -->
+                    <!-- NAVIGATION SOUS L'IMAGE -->
                     <div class="single-photo__nav-thumbs">
-                        <div class="nav-container">
+                        <?php
+                        $all_posts  = get_posts([
+                            'post_type'      => 'photo',
+                            'posts_per_page' => -1,
+                            'orderby'        => 'date',
+                            'order'          => 'ASC'
+                        ]);
 
-                            <?php
-                            // Récupérer les posts du CPT
-                            $all_posts = get_posts([
-                                'post_type' => 'photo',
-                                'posts_per_page' => -1,
-                                'orderby' => 'date',
-                                'order' => 'ASC'
-                            ]);
+                        $current_id = get_the_ID();
+                        $index      = array_search($current_id, wp_list_pluck($all_posts, 'ID'));
+                        $total      = count($all_posts);
+                        $next_post  = $all_posts[($index + 1) % $total];
+                        $prev_post  = $all_posts[($index - 1 + $total) % $total];
+                        ?>
 
-                            // Trouver index du post actuel
-                            $current_id = get_the_ID();
-                            $index = array_search($current_id, wp_list_pluck($all_posts, 'ID'));
+                        <div class="nav-container"
+                            data-current-index="<?php echo $index; ?>"
+                            data-total-posts="<?php echo $total; ?>">
 
-                            // Index du prochain post (carrousel infini)
-                            $next_index = ($index + 1) % count($all_posts);
-                            $prev_index = ($index - 1 + count($all_posts)) % count($all_posts);
+                            <div class="preview-image"></div>
 
-                            $next_post = $all_posts[$next_index];
-                            $prev_post = $all_posts[$prev_index];
-                            ?>
+                            <div class="arrows-container">
+                                <a class="arrow arrow-left"
+                                    href="<?php echo get_permalink($prev_post->ID); ?>"
+                                    data-thumbnail="<?php echo esc_attr(get_the_post_thumbnail($prev_post->ID, 'thumbnail')); ?>">
+                                    <!-- SVG flèche gauche -->
+                                </a>
 
-                            <div class="nav-container"
-                                data-current-index="<?php echo $index; ?>"
-                                data-total-posts="<?php echo count($all_posts); ?>">
-
-                                <div class="nav-container">
-
-
-                                    <!-- IMAGE DE PREVIEW (cachée par défaut, s'affiche au survol) -->
-                                    <div class="preview-image"></div>
-
-                                    <!-- FLÈCHES (gardez votre design SVG existant) -->
-                                    <div class="arrows-container">
-                                        <a class="arrow arrow-left"
-                                            href="<?php echo get_permalink($prev_post->ID); ?>"
-                                            data-thumbnail="<?php echo esc_attr(get_the_post_thumbnail($prev_post->ID, 'thumbnail')); ?>">
-                                            <!-- Votre SVG de flèche gauche ici -->
-                                        </a>
-
-                                        <a class="arrow arrow-right"
-                                            href="<?php echo get_permalink($next_post->ID); ?>"
-                                            data-thumbnail="<?php echo esc_attr(get_the_post_thumbnail($next_post->ID, 'thumbnail')); ?>">
-                                            <!-- Votre SVG de flèche droite ici -->
-                                        </a>
-                                    </div>
-
-
-                                </div>
+                                <a class="arrow arrow-right"
+                                    href="<?php echo get_permalink($next_post->ID); ?>"
+                                    data-thumbnail="<?php echo esc_attr(get_the_post_thumbnail($next_post->ID, 'thumbnail')); ?>">
+                                    <!-- SVG flèche droite -->
+                                </a>
                             </div>
 
+                        </div><!-- fin .nav-container -->
 
+                    </div><!-- fin .single-photo__nav-thumbs -->
 
+                </div><!-- fin .single-photo__right -->
 
+            </section><!-- fin .single-photo__wrapper -->
 
-            </section>
+            <span class="separator-line-2"></span>
 
             <!-- SECTION "VOUS AIMEREZ AUSSI" -->
             <section class="related-photos">
@@ -165,21 +91,18 @@ if ($categories && !is_wp_error($categories)) {
 
                 <div class="related-photos__grid">
                     <?php
-                    // Récupérer les catégories de la photo actuelle
-                    $categories = wp_get_post_terms(get_the_ID(), 'categorie', array('fields' => 'ids'));
+                    $cat_ids = wp_get_post_terms(get_the_ID(), 'categorie', ['fields' => 'ids']);
 
                     $related = new WP_Query([
                         'post_type'      => 'photo',
                         'posts_per_page' => 2,
-                        'post__not_in'   => [get_the_ID()], // exclut la photo actuelle
+                        'post__not_in'   => [get_the_ID()],
                         'orderby'        => 'rand',
-                        'tax_query'      => [
-                            [
-                                'taxonomy' => 'categorie',
-                                'field'    => 'term_id',
-                                'terms'    => $categories,  // filtre par même catégorie
-                            ],
-                        ],
+                        'tax_query'      => [[
+                            'taxonomy' => 'categorie',
+                            'field'    => 'term_id',
+                            'terms'    => $cat_ids,
+                        ]],
                     ]);
 
                     if ($related->have_posts()) :
@@ -191,11 +114,11 @@ if ($categories && !is_wp_error($categories)) {
                     endif;
                     ?>
                 </div>
-            </section>
-
+            </section><!-- fin .related-photos -->
 
     <?php endwhile;
     endif; ?>
+
 </main>
 
 <?php get_footer(); ?>

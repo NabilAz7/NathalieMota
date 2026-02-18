@@ -10,7 +10,14 @@ $reference = SCF::get('reference');
     data-reference="<?php echo esc_attr($reference ? $reference : ''); ?>">
 
     <a href="<?php the_permalink(); ?>" class="photo-link">
-        <?php the_post_thumbnail('large'); ?>
+        <?php
+        // ✅ get_the_post_thumbnail() permet d'ajouter des attributs
+        echo get_the_post_thumbnail(get_the_ID(), 'large', [
+            'loading'  => 'lazy',    // ✅ Charge uniquement quand visible
+            'decoding' => 'async',   // ✅ Décode en arrière-plan
+            'alt'      => esc_attr(get_the_title()) // ✅ Alt text pour l'accessibilité
+        ]);
+        ?>
     </a>
 
     <!-- Overlay au survol -->
