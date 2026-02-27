@@ -60,6 +60,10 @@ body {
     background: var(--color-white);
 }
 
+.single-photo .site-header {
+    margin-bottom: 25px;
+}
+
 .main-menu {
     display: block;
 }
@@ -89,7 +93,6 @@ body {
     font-weight: 700;
 }
 
-/* Burger - caché sur desktop */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -604,11 +607,10 @@ div.custom-select-item.default {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     gap: 60px;
-    align-items: start;
 }
 
 .single-photo__left {
-    align-self: flex-end;
+    align-self: end;
     overflow: visible;
 }
 
@@ -644,7 +646,7 @@ div.custom-select-item.default {
 .separator-line-1 {
     display: block;
     border-bottom: 2px solid var(--color-black);
-    width: 50%;
+    width: 100%;
     margin-top: -15px;
     margin-bottom: 30px;
 }
@@ -680,15 +682,14 @@ span.item1 {
 }
 
 .single-photo__right {
-    position: relative;
-    top: 2.8%;
+    height: 800px;
+    align-self: start;
 }
 
 .single-photo__image {
     width: 100%;
-    border-radius: 4px;
+    height: 90%;
     object-fit: cover;
-    height: 800px;
 }
 
 .single-photo__nav-thumbs {
@@ -702,6 +703,8 @@ span.item1 {
     align-items: center;
     justify-content: center;
     padding: 20px 0;
+    position: relative;
+    margin-top: 45px;
 }
 
 .arrows-container {
@@ -768,7 +771,6 @@ span.item1 {
     height: auto;
 }
 
-/* Photos apparentées */
 .related-photos {
     margin-top: 100px;
 }
@@ -991,26 +993,22 @@ span.item1 {
    =================================== */
 @media (max-width: 768px) {
 
-    :root {
-        --header-height: 45px;
-    }
-
-    body {
-        padding-top: 45px;
-    }
-
     .site-header {
         position: absolute;
-        top: 0;
+        top: 46px;
         left: 0;
         width: 100%;
         margin-left: 0;
         z-index: 1002;
-        padding: 2.5% 5%;
+        padding: 15px 10px;
     }
 
     .burger-menu {
         display: flex;
+    }
+
+    .logo {
+        margin-left: 15px;
     }
 
     .main-menu {
@@ -1041,26 +1039,28 @@ span.item1 {
         display: flex;
         width: 100%;
         background: var(--color-white);
-        padding: 0;
-        height: var(--header-height);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         align-items: center;
         position: sticky;
-        top: 0;
+        top: 46px;
         z-index: 10;
         border-bottom: 3px solid var(--color-primary);
         flex-shrink: 0;
+        height: 60px;
     }
 
     .burger-header-duplicate .logo {
-        position: absolute;
-        top: -20px;
-        left: 20px;
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        padding: 0px;
+        margin-top: 0px;
     }
 
     .burger-header-duplicate .logo img {
         max-width: 130px;
         height: auto;
+        display: block;  
     }
 
     .menu-nav-wrapper {
@@ -1178,35 +1178,29 @@ span.item1 {
         align-items: center;
         width: 100%;
         padding: 0;
-        top: 0;
+        margin-bottom: 20px;
     }
 
     .single-photo__image {
         width: 90%;
         max-width: 350px;
         height: auto;
-        margin: 20px auto;
+        margin: 0 auto;
         position: static;
         display: block;
         object-fit: contain;
     }
 
     .single-photo__left {
-        position: relative;
-        top: -90px;
+        padding-top: 20px;
     }
 
     .single-photo__meta {
-        position: relative;
-        left: 20%;
+        padding-left: 20px;
     }
 
     .single-photo__contact-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-        position: relative;
-        left: 2.5%;
+        padding-left: 20px;
     }
 
     .nav-container {
@@ -1235,31 +1229,26 @@ span.item1 {
         align-self: flex-start;
     }
 
-    .separator-line-2 {
-        position: relative;
-        top: -85px;
-        margin-top: 0;
+    .related-photos {
+        margin-top: 20px;
     }
 
     .related-photos h2 {
-        position: relative;
-        top: -20vh;
-        left: 11%;
+        position: static;
+        padding-left: 20px;
+        margin-bottom: 20px;
     }
 
     .related-photos__grid {
         display: flex;
         flex-direction: column;
-        position: relative;
-        top: -20vh;
-        left: -2%;
+        position: static;
     }
 
     section.related-photos {
-        margin-left: 6%;
-        position: relative;
-        top: -10%;
-        height: 750px;
+        margin-left: 0;
+        position: static;
+        height: auto;
     }
 
     /* ===================================
@@ -1272,12 +1261,11 @@ span.item1 {
     .single-photo-mobile-layout .single-photo__left {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
         padding: 0;
         overflow: visible;
         box-sizing: border-box;
-        top: -90px;
     }
 
     .single-photo-mobile-layout .single-photo__title,
@@ -1286,13 +1274,12 @@ span.item1 {
         width: 100%;
         max-width: 100%;
         position: static;
-        left: 0;
-        right: 0;
-        text-align: center;
+        text-align: left;
+        padding-left: 0;
     }
 
     .single-photo-mobile-layout .single-photo__title {
-        font-size: 55px;
+        font-size: 49px;
     }
 
     .single-photo-mobile-layout .single-photo__meta {
@@ -1302,14 +1289,14 @@ span.item1 {
         margin: 0;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .single-photo-mobile-layout .single-photo__contact-wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         gap: 10px;
     }
 
@@ -1321,7 +1308,6 @@ span.item1 {
     .single-photo-mobile-layout .separator-line-1 {
         margin-top: 20px;
         margin-bottom: 20px;
-        top: 0;
     }
 
     .single-photo-mobile-layout .separator-line-2 {
@@ -1334,7 +1320,8 @@ span.item1 {
         justify-content: center;
         align-items: center;
         width: 100%;
-        padding: 0;
+        height: auto;
+        margin-top: 20px;
     }
 
     .single-photo-mobile-layout .single-photo__image {
